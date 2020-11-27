@@ -1,0 +1,5 @@
+# R	pageNum	minX	minY	maxX	maxY	borderWidth	borderColor	borderOpacity	fillingColor	fillingOpacity
+# C	pageNum	x	y	radius	borderWidth	borderColor	borderOpacity	fillingColor	fillingOpacity
+# T	pageNum	x	y	text	font	fontsize	color	opacity
+R	1	57.4	5.6	398.0	154.8	5	rgb(123,233,12)	-	blue	1
+C	3	287.4	265.6	25.0	2	-	1	red	1

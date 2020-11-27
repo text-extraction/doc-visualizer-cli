@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>textextraction</groupId>
+  <artifactId>doc-visualizer-cli</artifactId>
+  <name>${project.artifactId}</name>
+  <version>0.1</version>
+
+  <properties>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+    <checkstyle.consoleOutput>true</checkstyle.consoleOutput>
+    <checkstyle.config.location>./checkstyle_config.xml</checkstyle.config.location>
+  </properties>
+
+  <repositories>
+    <repository>
+      <id>common</id>
+      <url>https://github.com/text-extraction/doc-visualizer/raw/mvn-repo/</url>
+    </repository>
+  </repositories>
+
+  <dependencies>
+    <dependency>
+      <groupId>textextraction</groupId>
+      <artifactId>doc-visualizer</artifactId>
+      <version>0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sourceforge.argparse4j</groupId>
+      <artifactId>argparse4j</artifactId>
+      <version>0.8.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+      <version>2.13.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-core</artifactId>
+      <version>2.13.3</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- Configure the checkstyle plugin. -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>3.1.1</version>
+        <executions>
+          <execution>
+            <id>checkstyle</id>
+            <goals>
+              <goal>checkstyle</goal>
+            </goals>
+            <phase>prepare-package</phase>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- Configure the assembly plugin for creating an executable jar with all dependencies. -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>3.3.0</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>textextraction.visualizer.DocumentVisualizerCli</mainClass>
+            </manifest>
+            <manifestEntries>
+              <Multi-Release>true</Multi-Release>
+            </manifestEntries>
+          </archive>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+          <outputDirectory>./bin</outputDirectory>
+          <finalName>${project.name}</finalName>
+          <appendAssemblyId>false</appendAssemblyId>
+          <attach>false</attach>
+        </configuration>
+        <executions>
+          <execution>
+            <id>build-cli</id>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <!-- Get rid of the "Unable to locate Source XRef to link to - DISABLED" warning -->
+  <reporting>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jxr-plugin</artifactId>
+        <version>2.3</version>
+      </plugin>
+    </plugins>
+  </reporting>
+</project>

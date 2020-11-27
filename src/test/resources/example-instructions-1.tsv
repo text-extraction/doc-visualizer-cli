@@ -1,0 +1,12 @@
+# R	pageNum	minX	minY	maxX	maxY	borderWidth	borderColor	borderOpacity	fillingColor	fillingOpacity
+# L	pageNum	x0	y0	x1	y0	width	color	opacity
+# C	pageNum	x	y	radius	borderWidth	borderColor	borderOpacity	fillingColor	fillingOpacity
+# T	pageNum	x	y	text	font	fontsize	color	opacity
+R	1	87.4	65.6	198.0	654.8	5	red	-	blue	0.5
+R	1	187.4	165.6	298.0	554.8	2	red	1	-	-
+R	2	287.4	265.6	398.0	554.8	2	red	-	rgb(123, 145, 12)	0.5
+L	1	0	0	100	100	5	blue	0.2
+L	1	100	100	200	0	2	red	0.8
+L	1	200	0	300	100	10
+C	3	287.4	265.6	5.0	2	-	1	black	0.5
+T	1	300	340	Hello World	times-roman	48	blue	0.5

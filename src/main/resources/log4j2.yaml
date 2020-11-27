@@ -1,0 +1,32 @@
+Configuration:
+  Properties:
+    Property:
+      name: logDir
+      value: "logs"
+
+  Appenders:
+    Console:
+      name: "consoleAppender"
+      target: "SYSTEM_OUT"
+      PatternLayout:
+        Pattern: "%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%M:%L - %m%n"
+
+    RollingFile:
+      name: "fileAppender"
+      fileName: "${logDir}/logfile.log"
+      filePattern: "${logDir}/logfile-%d{MM-dd-yyyy}-%i.log.gz"
+      PatternLayout:
+        Pattern: "%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%M:%L - %m%n"
+      Policies:
+        OnStartupTriggeringPolicy:
+          minSize: 1
+
+  Loggers:
+    Root:
+      level: "all"
+      AppenderRef:
+        - ref: "consoleAppender"
+          # Take the logLevel given in the context, or the given default level.
+          level: ${ctx:consoleLogLevel:-info}
+        - ref: "fileAppender"
+          level: "trace"
